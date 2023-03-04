@@ -1,0 +1,48 @@
+*{
+    margin : 0;
+    box-sizing: border-box;
+}
+.container{
+    max-width: 80%;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+
+}
+.product{
+    border: 1px solid black;
+    border-radius: 5%;
+}
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.prod-img{
+    max-height: 200px;
+    max-width : 200px;
+}
+
+
+.pad{
+    padding : 10px;
+}
+
+
+/*...........auction product page styles are here --------*/
+.product-container{
+    padding-top: 40px;
+    width : 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    gap : 40px;
+}
+.image-section{
+    width: 60%;
+}
+.product-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+

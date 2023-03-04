@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="product-container">
+    <div class="image-section">
+        <img src="/uploads/{{product.prod_image}}" />
+    </div>
+
+    <div class="product-details">
+        <div class="product-name"><h2>{{ product.prod_name}}</h2></div>
+        <div class="product-description">{{product.prod_desc}}</div>
+        <div class="product-price"><h3>Rs {{product.prod_price}}</h3></div>
+        
+
+        <div class="bid">
+            
+            <form action="/auction/auc_product/{{product.prod_id}}" method="post" id="bid-form">
+                {% csrf_token %}
+                Raise Bid by : <input type="number" name="bid_amt" id="">
+                <button type="submit">BID</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/static/bid.js"></script>
+{% endblock body %}

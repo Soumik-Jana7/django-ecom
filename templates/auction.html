@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<body>
+    <h1>This is the auction page</h1>
+      <div class="container">
+      {% comment %} need to display the products with decent css {% endcomment %}
+      
+      {% for item in products %}
+        <div class="product pad">
+          <div class="prod-img pad"><img src="uploads\{{item.prod_image}}" /></div>
+          {{ item.prod_name }}
+          <br>
+          Present Bid : {{item.prod_price}}
+          <a href="auction/auc_product/{{item.prod_id}}">Bid</a>
+        </div>
+      {% endfor %}
+    </div>
+
+</body>
+{% endblock body %}

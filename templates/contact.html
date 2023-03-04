@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<h2 class="text-center">Enter the following details : </h2>
+<div class="container">
+    <form action="/contact" method="post">
+        {% csrf_token %}
+        <p>Name : </p>
+        <p><input type="text" name="name" id=""></p>
+
+        <p>Email : </p>
+        <p><input type="text" name="email" id=""></p>
+
+        <p>Phone : </p>
+        <p><input type="number" name="phone" id=""></p>
+
+        <p>Your reason to contact us : </p>
+        <p><textarea name="desc" id="" cols="30" rows="4"></textarea></p>
+        
+        <button class="btn btn-lg btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock body %}
