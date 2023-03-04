@@ -13,3 +13,9 @@ class AuctionProduct(models.Model):
 
     def __str__(self):
         return self.prod_name
+
+class User(models.Model):
+    user_name = models.CharField(max_length=122, default="")
+    user_id = models.IntegerField(default=0)
+    user_email = models.CharField(max_length=122, default="")
+    

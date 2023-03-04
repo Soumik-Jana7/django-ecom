@@ -2,31 +2,66 @@
     margin : 0;
     box-sizing: border-box;
 }
+.auction-heading{
+    margin : 25px;
+}
+.background{
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgb(218, 218, 218);
+}
 .container{
     max-width: 80%;
     display: grid;
     grid-template-columns: 30% 30% 30%;
-
+    grid-gap : 50px;
+    margin-bottom: 100px;
 }
 .product{
-    border: 1px solid black;
+    font-weight: 500;
+    background-color: #fff;
     border-radius: 5%;
+    box-shadow: 5px 5px 5px rgb(110, 110, 110);
+    display: flex;
+    flex-direction: column;
+
 }
 img{
     max-width: 100%;
     max-height: 100%;
 }
 
-.prod-img{
-    max-height: 200px;
-    max-width : 200px;
+.card-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height : 180px;
 }
+
+ .prod-img{
+    margin: auto;
+    max-height: 300px;
+}  
 
 
 .pad{
     padding : 10px;
 }
 
+.start-bidding{
+    padding : 10px;
+    border-radius: 10%;
+    text-decoration: none;
+    background-color: rgb(91, 190, 63);
+    color: #fff;
+    display: block;
+    text-align: center;
+    width : 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.start-bidding:hover{
+    background-color: rgb(164, 240, 144);
+}
 
 /*...........auction product page styles are here --------*/
 .product-container{
@@ -44,5 +79,14 @@ img{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.bid-button{
+    background-color: rgb(229, 131, 85);
+
+    border-radius: 20%;
+}
+.bid-button:hover{
+    background-color: rgb(226, 99, 40);
 }
 

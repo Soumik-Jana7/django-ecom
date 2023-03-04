@@ -17,9 +17,10 @@ def auction(request):
 def auc_product(request,myid):
     if(request.method == 'POST'):
         print('got bid request')
-        raise_amt = request.POST.get('bid_amt')
-        product = AuctionProduct.objects.filter(id=myid)
-        
-    else:
-        product = AuctionProduct.objects.filter(id=myid)
-        return render(request,'auc_product.html',{'product':product[0]})
+        raise_amt = int(request.POST.get('bid_amt'))
+        product = AuctionProduct.objects.get(id=myid)
+        product.prod_price += raise_amt
+        product.save()
+
+    product = AuctionProduct.objects.filter(id=myid)
+    return render(request,'auc_product.html',{'product':product[0]})

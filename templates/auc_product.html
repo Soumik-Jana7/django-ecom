@@ -18,7 +18,7 @@
             <form action="/auction/auc_product/{{product.prod_id}}" method="post" id="bid-form">
                 {% csrf_token %}
                 Raise Bid by : <input type="number" name="bid_amt" id="">
-                <button type="submit">BID</button>
+                <button class="bid-button" type="submit">BID</button>
             </form>
         </div>
     </div>
