@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Registration Form</title>
+	<link rel="stylesheet" type="text/css" href="/static/register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        function handleSubmit()
+        {
+            if(localStorage.getItem('currentUser'))
+            {  
+                console.log('making the get request'); 
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", '/', false ); // false for synchronous request
+                xmlHttp.send( null );
+            }
+            let name = userform.name.value;
+            console.log(name);
+            let email = userform.email.value;
+            let password = userform.password.value;
+            let csrfmiddlewaretoken = userform.csrfmiddlewaretoken.value;
+            const userDetails = {
+                name : name,
+                email : email,
+                password : password
+            }
+            localStorage.setItem('currentUser', JSON.stringify(userDetails));
+
+            console.log(csrfmiddlewaretoken);
+            
+            let form = document.getElementById('userform');
+            form.submit();
+            // const userToken = {csrfmiddlewaretoken : csrfmiddlewaretoken,...userDetails}
+            // console.log(userToken);
+            // fetch("/register/user", {
+            // method: "GET",
+            // headers: {'Content-Type': 'application/json'}, 
+            // body: userToken
+            // }).then(res => {
+            // console.log("Request complete! response:");
+            // });
+        }
+    </script>
+    <!-- Enforce email uniqueness TODO-->
+</head>
+<body>
+	<div class="container">
+		<form action="/register/user" method="post" name="userform" id="userform">
+            {% csrf_token %}
+			<h2>Registration Form</h2>
+            
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" id="name" name="name" required>
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" id="email" name="email" required>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" id="password" name="password" required>
+			</div>
+			<div class="form-group">
+				<label for="confirm_password">Confirm Password</label>
+				<input type="password" id="confirm_password" name="confirm_password" required>
+			</div>
+			<div onclick="handleSubmit()" type="submit" id="submit-button">Submit</div>
+		</form>
+	</div>
+</body> 
+</html>

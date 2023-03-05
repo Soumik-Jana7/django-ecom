@@ -31,6 +31,7 @@ img{
 }
 
 .card-details{
+    padding-left: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -74,6 +75,7 @@ img{
 }
 .image-section{
     width: 60%;
+    max-height: 550px;
 }
 .product-details{
     display: flex;
@@ -90,3 +92,8 @@ img{
     background-color: rgb(226, 99, 40);
 }
 
+
+#countdown{
+    color : red;
+    font-size: 1.4rem;
+}

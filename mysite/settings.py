@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django_socketio',
     'auction.apps.AuctionConfig',
     'hello.apps.HelloConfig',
     'django.contrib.admin',

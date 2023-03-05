@@ -1,8 +1,92 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<script defer>
+    
+    function handleBid(){
+        console.log('benchod page kaun refresh karra hai');
+         let form = document.getElementById('bid_form');
+         let currentUser = localStorage.getItem('currentUser');
+         console.log(currentUser);
+         let userDetails = JSON.parse(currentUser);
 
-<div class="product-container">
+         bid_form.useremail.value = userDetails.email;
+        console.log(bid_form.useremail.value);
+        
+        //alert("stop");
+        //form.submit();
+    }
+    let timeRemaining, countdownInterval;
+    function countdown() {
+        console.log(timeRemaining)
+        var hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+        var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+        
+        console.log(minutes)
+        console.log(seconds)
+
+        document.getElementById("countdown").innerHTML ="Remaining Time -> <div class='timer' style='color : red;font-size: 1.4rem;'>" + hours + "h " + minutes + "m " + seconds + "s </div>" ;
+
+        // update the time remaining
+        timeRemaining -= 1000;
+
+        // check if the countdown has ended
+        if (timeRemaining < 0) {
+            clearInterval(countdownInterval);
+            document.getElementById("countdown").innerHTML = "Countdown has ended!";
+        }
+    }
+
+    window.onload = function checkbid()
+    {
+        console.log("check bid was called");
+        let status = document.getElementsByClassName('bid_status')[0].innerText;
+        if(status === 'fail')
+            alert("Your bid amount was lower than current bid . Please bid again");
+        else if(status === 'tle')
+            alert("Bid timer has ended , Item is no longer for sale")
+
+        let enddate_string = document.getElementsByClassName('end-date')[0].innerText;
+        let endtime_string = document.getElementsByClassName('end-time')[0].innerText;
+        var dateObj = new Date(enddate_string);
+        console.log(dateObj);
+
+
+        // get the time string
+        var timeString = endtime_string;
+
+        // split the string into hours and minutes
+        var timeArr = timeString.split(":");
+        var hours = parseInt(timeArr[0], 10);
+        var minutes = parseInt(timeArr[1], 10);
+
+        if (timeString.indexOf("p.m.") !== -1 && hours !== 12) {
+        hours += 12;
+        } else if (timeString.indexOf("a.m.") !== -1 && hours === 12) {
+        hours = 0;
+        }
+
+        dateObj.setHours(hours);
+        dateObj.setMinutes(minutes);
+
+
+        console.log(dateObj); 
+        
+        var currentTime = new Date();
+        var endTime = dateObj;
+
+        // calculate the time remaining in milliseconds
+         timeRemaining = endTime - currentTime;
+        console.log(timeRemaining);
+
+        countdownInterval = setInterval(countdown, 1000);
+    }
+
+</script>
+<div class="bid_status"  hidden>{{bid}}</div>
+<div class="product-container" >
+    
     <div class="image-section">
         <img src="/uploads/{{product.prod_image}}" />
     </div>
@@ -10,18 +94,22 @@
     <div class="product-details">
         <div class="product-name"><h2>{{ product.prod_name}}</h2></div>
         <div class="product-description">{{product.prod_desc}}</div>
-        <div class="product-price"><h3>Rs {{product.prod_price}}</h3></div>
+        <div class="product-price">Last Updated : <h3>Rs {{product.prod_price}}</h3></div>
+        <div class="end-date">Closes at : {{product.end_time.date}}</div>
+        <div class="end-time">{{product.end_time.time}}</div>
+        <div id="countdown"></div>
+
         
 
         <div class="bid">
             
-            <form action="/auction/auc_product/{{product.prod_id}}" method="post" id="bid-form">
+            <form action="/auction/auc_product/{{product.prod_id}}" method="post" id="bid_form" name="bid_form">
                 {% csrf_token %}
                 Raise Bid by : <input type="number" name="bid_amt" id="">
-                <button class="bid-button" type="submit">BID</button>
+                <input type="hidden" name="useremail">
+                <button class="bid-button" onclick="handleBid()">BID</button>
             </form>
         </div>
     </div>
 </div>
-<script src="/static/bid.js"></script>
 {% endblock body %}
